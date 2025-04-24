@@ -45,25 +45,28 @@ public class MainApp1 {
     private static void displayMenu() {
         System.out.println("=================================");
         System.out.println("1. Log in");
-        System.out.println("2. Buy product");
-        System.out.println("3. Cancel product");
+        System.out.println("2. Add Product to Cart");
+        System.out.println("3. Remove Product from Cart");
         System.out.println("4. Display all products");
         System.out.println("5. Sign out");
         System.out.println("6. Exit");
         System.out.println("==================================");
-        System.out.print("Enter your choice: ");
+        System.out.print("Enter a number: ");
     }
+
+    static boolean loggedInUser = false;
+
 
     private static void login() {
         System.out.print("Enter username: ");
         String username = sc.next();
         System.out.print("Enter password: ");
-        int password=sc.nextInt();
+        int password = sc.nextInt();
         if (userMap.containsKey(username)) {
             userMap.get(username);
         }
 
-
+        loggedInUser = true;
         System.out.println("Login successful");
         }  {
             System.out.println("Invalid username or password");
@@ -71,12 +74,13 @@ public class MainApp1 {
 
 
         private static void buyProduct() {
-            int loggedInUser=0;
-            if (loggedInUser == 0) {
+            if (loggedInUser) {
                 System.out.print("Enter product name: ");
                 String productName = sc.next();
+
                 System.out.print("Enter product price: ");
                 double productPrice = sc.nextDouble();
+
                 bl.buyProduct(productName, productPrice);
             } else {
                 System.out.println("You need to log in first");
@@ -84,8 +88,7 @@ public class MainApp1 {
         }
 
         private static void cancelProduct() {
-            int loggedInUser=0;
-            if (loggedInUser == 0) {
+            if (loggedInUser) {
                 System.out.print("Enter product name: ");
                 String productName = sc.next();
                 bl.cancelProduct(productName);
@@ -95,6 +98,7 @@ public class MainApp1 {
         }
 
         private static void logout() {
+            loggedInUser = false;
             System.out.println("Logged out");
         }
     }
